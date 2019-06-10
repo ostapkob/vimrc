@@ -1,48 +1,9 @@
-" Подсветка строки, в которой находится в данный момент курсор
-set cursorline
-
-" Отключаем панель инструментов
-set guioptions-=T
-" Отключаем графические диалоги
-set guioptions+=c
-" Отключаем графические табы (текстовые занимают меньше места)
-set guioptions-=e
-
-" Устанавливаем шрифт
-set guifont=Monospace\ 9
-
-" Меню -->
-    " По умолчанию меню скрыто
-    set guioptions-=m
-
-    " Горячие клавиши скрытия/отображения меню -->
-        function MyToggleMenu()
-            let old_guioptions = &guioptions
-
-            " Если меню в данный момент видимо
-            if stridx(old_guioptions, 'm') != -1
-                set guioptions-=m
-            else
-                set guioptions+=m
-            endif
-        endfunction
-
-        cmap <F12> <ESC>:call MyToggleMenu()<CR>
-        imap <F12> <ESC>:call MyToggleMenu()<CR>
-        nmap <F12> :call MyToggleMenu()<CR>
-        vmap <F12> <ESC>:call MyToggleMenu()<CR>
-    " Горячие клавиши скрытия/отображения меню <--
-" Меню <--
+set guioptions-=T " РћС‚РєР»СЋС‡Р°РµРј РїР°РЅРµР»СЊ РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ
+set guifont=Monospace\ 9 " РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С€СЂРёС„С‚
+set guioptions-=m " РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РјРµРЅСЋ СЃРєСЂС‹С‚Рѕ
 
 
-
-
-
-
-
-
-
-"не забудь установить git
+"РЅРµ Р·Р°Р±СѓРґСЊ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ git
 if has('win32') || has('win64')                                                               
    let g:plugged_home = '~/.vim/plugged' 
    let g:python_folder = '~\AppData\Local\Programs\Python\Python37-32\python.exe'     
@@ -54,52 +15,52 @@ else
      endif                                                                                     
 endif   
 
-set autoindent "Включить автоотступы как предыдущие
-set autochdir "Автоматически изменять текущий каталог
-set backspace=indent,eol,start "Параметры Backspace ??
-set cuc cul "Курсор
-set cursorline "Выделите строку, находящуюся в данный момент под курсором.
-set confirm "Отображение диалогового окна подтверждения при закрытии несохраненного файла.
+set autoindent "Р’РєР»СЋС‡РёС‚СЊ Р°РІС‚РѕРѕС‚СЃС‚СѓРїС‹ РєР°Рє РїСЂРµРґС‹РґСѓС‰РёРµ
+set autochdir "РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё РёР·РјРµРЅСЏС‚СЊ С‚РµРєСѓС‰РёР№ РєР°С‚Р°Р»РѕРі
+set backspace=indent,eol,start "РџР°СЂР°РјРµС‚СЂС‹ Backspace ??
+set cuc cul "РљСѓСЂСЃРѕСЂ
+set cursorline "Р’С‹РґРµР»РёС‚Рµ СЃС‚СЂРѕРєСѓ, РЅР°С…РѕРґСЏС‰СѓСЋСЃСЏ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚ РїРѕРґ РєСѓСЂСЃРѕСЂРѕРј.
+set confirm "РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РґРёР°Р»РѕРіРѕРІРѕРіРѕ РѕРєРЅР° РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ РїСЂРё Р·Р°РєСЂС‹С‚РёРё РЅРµСЃРѕС…СЂР°РЅРµРЅРЅРѕРіРѕ С„Р°Р№Р»Р°.
 set clipboard=unnamed "????????????????
-set expandtab "табы на пробелы и отстпы по >>
-set fileencodings=utf-8,cp1251,koi8-r,cp866
-set foldmethod=manual "manual, syntax, indent | метод фолдинга - вручную (для обычных файлов)
-set foldopen=all "Автоматическое открытие сверток при заходе в них
-set hidden "Скрыть файлы в фоновом режиме, а не закрывать их.
-set history=1000 "увеличить предел отмены.
-set hlsearch "Включаем подсветку выражения, которое ищется в тексте
-set ignorecase "игрнорировать регистр при поиске
-set iminsert=1 "Раскладка по умолчанию - английская
-set incsearch "При поиске перескакивать на найденный текст в процессе набора строки
-set mouse=a "Включить поддержку мыши
-set mousehide "Спрятать курсор мыши когда набираем текст
-set nobackup "Отключить создание бекапаа
-set noerrorbells "отключить звуковой сигнал при ошибках.
-set nolazyredraw "Отключить ленивую буферизацию
-set noshowmatch "не подсвечивать закрывающуюся скобку
-set noshowmode "убирает -- INSERT --
-set noswapfile "Отключить создание свапа
-set visualbell "Не мигать
-set nowrapscan "Останавливать поиск при достижении конца файла
-set nowritebackup "Отключить создание файлов бекапа на запись
-set nrformats-=octal "Воспринимать восьмеричное как десятичное при увеличении чисел.
-set relativenumber "подвижные относительные номера строк
-set scrolloff=1 "Количество строк экрана, которые нужно держать выше и ниже курсора.
-set shiftwidth=4 "Размер отступов по >>
-set shiftround "отступ как предыдущий
-set smartcase "включиь умный регистр
-set smarttab "Более умные отступы при вставке их с помощью tab.
-set softtabstop=4 "количество пробелов, которыми символ табуляции отображается при добавлении.
-set spell "включить проверку орфографии
-set t_vb= "Не пищать!
-set tabstop=4 "количество пробелов, которыми символ табуляции отображается
-set termencoding=utf-8 "Кодировка терминала
-set title "заголовок окна, отражающий редактируемый файл.
-set visualbell "Включает виртуальный звонок (моргает, а не бибикает при ошибках)
-set whichwrap=b,s,<,>,[,],l,h "Перемещать курсор на следующую строку при нажатии на клавиши вправо-влево и
-set wildignore+=.pyc,.swp "игнорировать файлы
-set wrap "Включить перенос строк
-set wildmenu "Display command line’s tab complete options as a menu.
+set expandtab "С‚Р°Р±С‹ РЅР° РїСЂРѕР±РµР»С‹ Рё РѕС‚СЃС‚РїС‹ РїРѕ >>
+set foldmethod=manual "manual, syntax, indent | РјРµС‚РѕРґ С„РѕР»РґРёРЅРіР° - РІСЂСѓС‡РЅСѓСЋ (РґР»СЏ РѕР±С‹С‡РЅС‹С… С„Р°Р№Р»РѕРІ)
+set foldopen=all "РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РѕС‚РєСЂС‹С‚РёРµ СЃРІРµСЂС‚РѕРє РїСЂРё Р·Р°С…РѕРґРµ РІ РЅРёС…
+set hidden "РЎРєСЂС‹С‚СЊ С„Р°Р№Р»С‹ РІ С„РѕРЅРѕРІРѕРј СЂРµР¶РёРјРµ, Р° РЅРµ Р·Р°РєСЂС‹РІР°С‚СЊ РёС….
+set history=1000 "СѓРІРµР»РёС‡РёС‚СЊ РїСЂРµРґРµР» РѕС‚РјРµРЅС‹.
+set hlsearch "Р’РєР»СЋС‡Р°РµРј РїРѕРґСЃРІРµС‚РєСѓ РІС‹СЂР°Р¶РµРЅРёСЏ, РєРѕС‚РѕСЂРѕРµ РёС‰РµС‚СЃСЏ РІ С‚РµРєСЃС‚Рµ
+set ignorecase "РёРіСЂРЅРѕСЂРёСЂРѕРІР°С‚СЊ СЂРµРіРёСЃС‚СЂ РїСЂРё РїРѕРёСЃРєРµ
+set iminsert=1 "Р Р°СЃРєР»Р°РґРєР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ - Р°РЅРіР»РёР№СЃРєР°СЏ
+set incsearch "РџСЂРё РїРѕРёСЃРєРµ РїРµСЂРµСЃРєР°РєРёРІР°С‚СЊ РЅР° РЅР°Р№РґРµРЅРЅС‹Р№ С‚РµРєСЃС‚ РІ РїСЂРѕС†РµСЃСЃРµ РЅР°Р±РѕСЂР° СЃС‚СЂРѕРєРё
+set mouse=a "Р’РєР»СЋС‡РёС‚СЊ РїРѕРґРґРµСЂР¶РєСѓ РјС‹С€Рё
+set mousehide "РЎРїСЂСЏС‚Р°С‚СЊ РєСѓСЂСЃРѕСЂ РјС‹С€Рё РєРѕРіРґР° РЅР°Р±РёСЂР°РµРј С‚РµРєСЃС‚
+set nobackup "РћС‚РєР»СЋС‡РёС‚СЊ СЃРѕР·РґР°РЅРёРµ Р±РµРєР°РїР°Р°
+set noerrorbells "РѕС‚РєР»СЋС‡РёС‚СЊ Р·РІСѓРєРѕРІРѕР№ СЃРёРіРЅР°Р» РїСЂРё РѕС€РёР±РєР°С….
+set nolazyredraw "РћС‚РєР»СЋС‡РёС‚СЊ Р»РµРЅРёРІСѓСЋ Р±СѓС„РµСЂРёР·Р°С†РёСЋ
+set noshowmatch "РЅРµ РїРѕРґСЃРІРµС‡РёРІР°С‚СЊ Р·Р°РєСЂС‹РІР°СЋС‰СѓСЋСЃСЏ СЃРєРѕР±РєСѓ
+set noshowmode "СѓР±РёСЂР°РµС‚ -- INSERT --
+set noswapfile "РћС‚РєР»СЋС‡РёС‚СЊ СЃРѕР·РґР°РЅРёРµ СЃРІР°РїР°
+set visualbell "РќРµ РјРёРіР°С‚СЊ
+set nowrapscan "РћСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊ РїРѕРёСЃРє РїСЂРё РґРѕСЃС‚РёР¶РµРЅРёРё РєРѕРЅС†Р° С„Р°Р№Р»Р°
+set nowritebackup "РћС‚РєР»СЋС‡РёС‚СЊ СЃРѕР·РґР°РЅРёРµ С„Р°Р№Р»РѕРІ Р±РµРєР°РїР° РЅР° Р·Р°РїРёСЃСЊ
+set nrformats-=octal "Р’РѕСЃРїСЂРёРЅРёРјР°С‚СЊ РІРѕСЃСЊРјРµСЂРёС‡РЅРѕРµ РєР°Рє РґРµСЃСЏС‚РёС‡РЅРѕРµ РїСЂРё СѓРІРµР»РёС‡РµРЅРёРё С‡РёСЃРµР».
+set relativenumber "РїРѕРґРІРёР¶РЅС‹Рµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Рµ РЅРѕРјРµСЂР° СЃС‚СЂРѕРє
+set scrolloff=1 "РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє СЌРєСЂР°РЅР°, РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ РґРµСЂР¶Р°С‚СЊ РІС‹С€Рµ Рё РЅРёР¶Рµ РєСѓСЂСЃРѕСЂР°.
+set shiftwidth=4 "Р Р°Р·РјРµСЂ РѕС‚СЃС‚СѓРїРѕРІ РїРѕ >>
+set shiftround "РѕС‚СЃС‚СѓРї РєР°Рє РїСЂРµРґС‹РґСѓС‰РёР№
+set smartcase "РІРєР»СЋС‡РёСЊ СѓРјРЅС‹Р№ СЂРµРіРёСЃС‚СЂ
+set smarttab "Р‘РѕР»РµРµ СѓРјРЅС‹Рµ РѕС‚СЃС‚СѓРїС‹ РїСЂРё РІСЃС‚Р°РІРєРµ РёС… СЃ РїРѕРјРѕС‰СЊСЋ tab.
+set softtabstop=4 "РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕР±РµР»РѕРІ, РєРѕС‚РѕСЂС‹РјРё СЃРёРјРІРѕР» С‚Р°Р±СѓР»СЏС†РёРё РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё.
+set spell "РІРєР»СЋС‡РёС‚СЊ РїСЂРѕРІРµСЂРєСѓ РѕСЂС„РѕРіСЂР°С„РёРё
+set t_vb= "РќРµ РїРёС‰Р°С‚СЊ!
+set tabstop=4 "РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕР±РµР»РѕРІ, РєРѕС‚РѕСЂС‹РјРё СЃРёРјРІРѕР» С‚Р°Р±СѓР»СЏС†РёРё РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ
+set termencoding=utf-8 "РљРѕРґРёСЂРѕРІРєР° С‚РµСЂРјРёРЅР°Р»Р°
+set title "Р·Р°РіРѕР»РѕРІРѕРє РѕРєРЅР°, РѕС‚СЂР°Р¶Р°СЋС‰РёР№ СЂРµРґР°РєС‚РёСЂСѓРµРјС‹Р№ С„Р°Р№Р».
+set visualbell "Р’РєР»СЋС‡Р°РµС‚ РІРёСЂС‚СѓР°Р»СЊРЅС‹Р№ Р·РІРѕРЅРѕРє (РјРѕСЂРіР°РµС‚, Р° РЅРµ Р±РёР±РёРєР°РµС‚ РїСЂРё РѕС€РёР±РєР°С…)
+set whichwrap=b,s,<,>,[,],l,h "РџРµСЂРµРјРµС‰Р°С‚СЊ РєСѓСЂСЃРѕСЂ РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ СЃС‚СЂРѕРєСѓ РїСЂРё РЅР°Р¶Р°С‚РёРё РЅР° РєР»Р°РІРёС€Рё РІРїСЂР°РІРѕ-РІР»РµРІРѕ Рё
+set wildignore+=.pyc,.swp "РёРіРЅРѕСЂРёСЂРѕРІР°С‚СЊ С„Р°Р№Р»С‹
+set wrap "Р’РєР»СЋС‡РёС‚СЊ РїРµСЂРµРЅРѕСЃ СЃС‚СЂРѕРє
+set wildmenu "Display command lineвЂ™s tab complete options as a menu.
+
 
 
 
@@ -108,24 +69,24 @@ syntax enable
 
 
 call plug#begin(g:plugged_home)
-Plug 'bling/vim-airline' "цветная менюшка airline
-Plug 'chriskempson/base16-vim' "Терминальные Темы ?
-Plug 'easymotion/vim-easymotion' "изи моушен
-Plug 'ervandew/supertab'  "супер таб
+Plug 'bling/vim-airline' "С†РІРµС‚РЅР°СЏ РјРµРЅСЋС€РєР° airline
+Plug 'chriskempson/base16-vim' "РўРµСЂРјРёРЅР°Р»СЊРЅС‹Рµ РўРµРјС‹ ?
+Plug 'easymotion/vim-easymotion' "РёР·Рё РјРѕСѓС€РµРЅ
+Plug 'ervandew/supertab'  "СЃСѓРїРµСЂ С‚Р°Р±
 Plug 'davidhalter/jedi-vim'
-Plug 'lpenz/vimcommander' "дерево каталогов
-Plug 'matze/vim-move' " переместить кусок кода Alt+J
+Plug 'lpenz/vimcommander' "РґРµСЂРµРІРѕ РєР°С‚Р°Р»РѕРіРѕРІ
+Plug 'matze/vim-move' " РїРµСЂРµРјРµСЃС‚РёС‚СЊ РєСѓСЃРѕРє РєРѕРґР° Alt+J
 Plug 'morhetz/gruvbox' "color sheme
 Plug 'jonathanfilip/vim-lucius' "color sheme
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
-Plug 'scrooloose/nerdtree' "дерево каталогов
-Plug 'tpope/vim-commentary'   "comment по gc
-Plug 'vim-airline/vim-airline-themes' "цветная менюшка airline
-Plug 'Yggdroot/indentLine' "Красивые табы |¦
-"Plug 'jiangmiao/auto-pairs' "авто кавычки
-Plug 'kien/ctrlp.vim' "не четкий поиск ctrl+p
+Plug 'scrooloose/nerdtree' "РґРµСЂРµРІРѕ РєР°С‚Р°Р»РѕРіРѕРІ
+Plug 'tpope/vim-commentary'   "comment РїРѕ gc
+Plug 'vim-airline/vim-airline-themes' "С†РІРµС‚РЅР°СЏ РјРµРЅСЋС€РєР° airline
+Plug 'Yggdroot/indentLine' "РљСЂР°СЃРёРІС‹Рµ С‚Р°Р±С‹ |В¦
+"Plug 'jiangmiao/auto-pairs' "Р°РІС‚Рѕ РєР°РІС‹С‡РєРё
+Plug 'kien/ctrlp.vim' "РЅРµ С‡РµС‚РєРёР№ РїРѕРёСЃРє ctrl+p
 Plug 'tell-k/vim-autopep8'
-Plug 'w0rp/ale' "Проверка синтаксиса  ??????????????????????
+Plug 'w0rp/ale' "РџСЂРѕРІРµСЂРєР° СЃРёРЅС‚Р°РєСЃРёСЃР°  ??????????????????????
 
 call plug#end()
 
@@ -136,6 +97,7 @@ filetype plugin indent on
 
 set wildignore=.git,.hg,
 :au FocusLost * :wa
+
 
 
 "<<<<<<<<<<<<<KEY<<<<<<<<<<<<<
@@ -154,7 +116,7 @@ inoremap <leader>, <C-x><C-o>
 nmap gn :bn<cr>
 nmap gp :bp<cr>
 nmap gd :bd<cr>
-nnoremap <c-z> :u<CR>      "отменить проблемное сочетание клавиш
+nnoremap <c-z> :u<CR>      "РѕС‚РјРµРЅРёС‚СЊ РїСЂРѕР±Р»РµРјРЅРѕРµ СЃРѕС‡РµС‚Р°РЅРёРµ РєР»Р°РІРёС€
 inoremap <c-z> <c-o>:u<CR>
 
 
@@ -165,8 +127,8 @@ inoremap <c-z> <c-o>:u<CR>
 
 
 "<<<<<<<<<NERDTree<<<<<<<<<<
-au VimEnter * NERDTreeToggle C:\YandexDisk\python
-let NERDTreeIgnore=['\.pyc$'] "исключения
+au VimEnter * NERDTreeToggle C:\BI\python.lnk
+let NERDTreeIgnore=['\.pyc$'] "РёСЃРєР»СЋС‡РµРЅРёСЏ
 let g:NERDTreeChDirMode=2
 let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeHijackNetrw = 0
@@ -188,11 +150,11 @@ set background=dark
     let g:airline_theme='dark' "'powerlineish'
     let g:airline#extensions#tabline#enabled = 1
 if $COLORTERM == 'gnome-terminal'
-      set t_Co=256 "может помочь с цветолвой политрой
+      set t_Co=256 "РјРѕР¶РµС‚ РїРѕРјРѕС‡СЊ СЃ С†РІРµС‚РѕР»РІРѕР№ РїРѕР»РёС‚СЂРѕР№
     endif
-let base16colorspace=256 "может помочь с цветолвой политрой
-"colorscheme base16-default-dark "может помочь с цветолвой политрой
-if has("termguicolors") "Поддержка True Color, если это доступно в терминале
+let base16colorspace=256 "РјРѕР¶РµС‚ РїРѕРјРѕС‡СЊ СЃ С†РІРµС‚РѕР»РІРѕР№ РїРѕР»РёС‚СЂРѕР№
+"colorscheme base16-default-dark "РјРѕР¶РµС‚ РїРѕРјРѕС‡СЊ СЃ С†РІРµС‚РѕР»РІРѕР№ РїРѕР»РёС‚СЂРѕР№
+if has("termguicolors") "РџРѕРґРґРµСЂР¶РєР° True Color, РµСЃР»Рё СЌС‚Рѕ РґРѕСЃС‚СѓРїРЅРѕ РІ С‚РµСЂРјРёРЅР°Р»Рµ
     set termguicolors
 endif
 
@@ -207,8 +169,8 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_linters = {'python': ['flake8']}
-
+"let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {'python': ['Autopep8']}
 
 
 
@@ -250,11 +212,10 @@ autocmd FileType python setlocal ts=4 sts=4 sw=4
 iab utf! # -*- coding: utf-8 -*-
 set completeopt=menuone  "menuone,noinsert
     let g:pymode_options = 0
-    let g:pymode_lint_write = 0 "не проверять при каждом сохранении
-    let g:pymode_folding = 0 "мне не нужен авто-фолдинг
-    let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
-    set completeopt-=preview "убрать раздражающие всплывающие окна с документацией для omnicompletion
-
+    let g:pymode_lint_write = 0 "РЅРµ РїСЂРѕРІРµСЂСЏС‚СЊ РїСЂРё РєР°Р¶РґРѕРј СЃРѕС…СЂР°РЅРµРЅРёРё
+    let g:pymode_folding = 0 "РјРЅРµ РЅРµ РЅСѓР¶РµРЅ Р°РІС‚Рѕ-С„РѕР»РґРёРЅРі
+    let g:pymode_rope_vim_completion = 0 "РЅРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р°РІС‚РѕРґРѕРїРѕР»РЅРµРЅРёРµ rope
+    set completeopt-=preview "СѓР±СЂР°С‚СЊ СЂР°Р·РґСЂР°Р¶Р°СЋС‰РёРµ РІСЃРїР»С‹РІР°СЋС‰РёРµ РѕРєРЅР° СЃ РґРѕРєСѓРјРµРЅС‚Р°С†РёРµР№ РґР»СЏ omnicompletion:
 
 
 
