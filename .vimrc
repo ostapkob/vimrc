@@ -25,6 +25,7 @@ set clipboard=unnamed "????????????????
 set expandtab "табы на пробелы и отстпы по >>
 set foldmethod=manual "manual, syntax, indent | метод фолдинга - вручную (для обычных файлов)
 set foldopen=all "Автоматическое открытие сверток при заходе в них
+set guiheadroom=0 "Пустое пространство в нижней части окон gVim
 set hidden "Скрыть файлы в фоновом режиме, а не закрывать их.
 set history=1000 "увеличить предел отмены.
 set hlsearch "Включаем подсветку выражения, которое ищется в тексте
