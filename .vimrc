@@ -1,7 +1,9 @@
-set guioptions-=T " Отключаем панель инструментов
-set guifont=Monospace\ 9 " Устанавливаем шрифт
-set guioptions-=m " По умолчанию меню скрыто
-
+if has("gui_running") " GUI mode
+    set guioptions-=T   " remove useless toolbar
+    set guioptions+=c   " prefer console dialogs to popups
+    set guioptions-=m " По умолчанию меню скрыто
+    set guifont=Monospace\ 9 " Устанавливаем шрифт
+endif
 
 "не забудь установить git
 if has('win32') || has('win64')                                                               
@@ -13,7 +15,7 @@ else
     if empty(glob("~/.vim/autoload/plug.vim"))                                        
          execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'                              
      endif                                                                                     
-endif   
+ endif   
 
 set autoindent "Включить автоотступы как предыдущие
 set autochdir "Автоматически изменять текущий каталог
@@ -21,10 +23,12 @@ set backspace=indent,eol,start "Параметры Backspace ??
 set cuc cul "Курсор
 set cursorline "Выделите строку, находящуюся в данный момент под курсором.
 set confirm "Отображение диалогового окна подтверждения при закрытии несохраненного файла.
+set completeopt=longest,menuone,preview " better completion
+set copyindent    " copy the previous indentation on autoindenting
 set clipboard=unnamed "????????????????
+set encoding=utf-8  " set vim encoding to UTF-8
 set expandtab "табы на пробелы и отстпы по >>
-set foldmethod=manual "manual, syntax, indent | метод фолдинга - вручную (для обычных файлов)
-set foldopen=all "Автоматическое открытие сверток при заходе в них
+" set foldmethod=manual "manual, syntax, indent | метод фолдинга - вручную (для обычных файлов)
 set guiheadroom=0 "Пустое пространство в нижней части окон gVim
 set hidden "Скрыть файлы в фоновом режиме, а не закрывать их.
 set history=1000 "увеличить предел отмены.
@@ -45,7 +49,10 @@ set nowrapscan "Останавливать поиск при достижени�
 set nowritebackup "Отключить создание файлов бекапа на запись
 set nrformats-=octal "Воспринимать восьмеричное как десятичное при увеличении чисел.
 set relativenumber "подвижные относительные номера строк
-set scrolloff=1 "Количество строк экрана, которые нужно держать выше и ниже курсора.
+set scrolloff=4 "Количество строк экрана, которые нужно держать выше и ниже курсора.
+set scrolljump=1 " minimal number of lines to scroll vertically
+set sidescroll=1    " minimal number of columns to scroll horizontally
+set sidescrolloff=4 " minimal number of columns to keep around the cursor
 set shiftwidth=4 "Размер отступов по >>
 set shiftround "отступ как предыдущий
 set smartcase "включиь умный регистр
@@ -57,24 +64,23 @@ set tabstop=4 "количество пробелов, которыми симв�
 set termencoding=utf-8 "Кодировка терминала
 set title "заголовок окна, отражающий редактируемый файл.
 set visualbell "Включает виртуальный звонок (моргает, а не бибикает при ошибках)
+set undolevels=1000 " boost undo levels
 set whichwrap=b,s,<,>,[,],l,h "Перемещать курсор на следующую строку при нажатии на клавиши вправо-влево и
 set wildignore+=.pyc,.swp "игнорировать файлы
 set wrap "Включить перенос строк
 set wildmenu "Display command line’s tab complete options as a menu.
 
-
-
-
 syntax on
 syntax enable
 
-
 call plug#begin(g:plugged_home)
+Plug 'airblade/vim-gitgutter' "git simvols
 Plug 'bling/vim-airline' "цветная менюшка airline
 Plug 'chriskempson/base16-vim' "Терминальные Темы ?
 Plug 'easymotion/vim-easymotion' "изи моушен
 Plug 'ervandew/supertab'  "супер таб
 Plug 'davidhalter/jedi-vim'
+Plug 'tpope/vim-fugitive' "git
 Plug 'lpenz/vimcommander' "дерево каталогов
 Plug 'matze/vim-move' " переместить кусок кода Alt+J
 Plug 'morhetz/gruvbox' "color sheme
@@ -95,19 +101,22 @@ filetype on
 filetype plugin on
 filetype plugin indent on
 
-
 set wildignore=.git,.hg,
 :au FocusLost * :wa
-
-
 
 "<<<<<<<<<<<<<KEY<<<<<<<<<<<<<
 imap jf <Esc>
 let mapleader=','
+let maplocalleader=","  " change local leader key to ,
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+" window resizing
+map <S-Left> <C-w><
+map <S-Down> <C-w>-
+map <S-Up> <C-w>+
+map <S-Right> <C-w>>
 noremap <silent> <F9> :cal VimCommanderToggle()<CR> "F3-view F4-edit F5-copy F6-move F7-create dir F8-del
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <Leader> <Plug>(easymotion-prefix)
@@ -117,32 +126,51 @@ inoremap <leader>, <C-x><C-o>
 nmap gn :bn<cr>
 nmap gp :bp<cr>
 nmap gd :bd<cr>
-nnoremap <c-z> :u<CR>      "отменить проблемное сочетание клавиш
+"croll slightly faster
+nnoremap <C-e> 2<C-e>
+nnoremap <C-y> 2<C-y>
+map <C-Up> <C-y>
+map <C-Down> <C-e>
+" move cursor wihout leaving insert mode
+    inoremap <C-j> <C-o>j
+    inoremap <C-k> <C-o>k
+    inoremap <C-l> <C-o>l
+" <leader>q quits the current window
+nnoremap <silent> <leader>q :q<CR>
+inoremap <silent> <leader>q <ESC>:q<CR>
+
+" yank/paste to/from the OS clipboard
+noremap <silent> <leader>y "+y
+noremap <silent> <leader>Y "+Y
+noremap <silent> <leader>p "+p
+noremap <silent> <leader>P "+P
+
+"<C-Space> triggers completion in insert mode
+inoremap <C-Space> <C-P>
+if !has("gui_running")
+      inoremap <C-@> <C-P>
+  endif
+
+noremap <silent>- :m+<CR> " move current line down
+noremap <silent>_ :m-2<CR> " move current line up
+vnoremap <silent>- :m '>+1<CR>gv=gv " move visual selection down
+vnoremap <silent>_ :m '<-2<CR>gv=gv " move visual selection up
+
+nnoremap <c-z> :u<CR>  "отменить проблемное сочетание клавиш
 inoremap <c-z> <c-o>:u<CR>
 
-
-
-
-
-
-
-
 "<<<<<<<<<NERDTree<<<<<<<<<<
-au VimEnter * NERDTreeToggle C:\BI\python.lnk
+au VimEnter * NERDTreeToggle /run/media/ostap/Windows 10 SSD/YandexDisk/python 
 let NERDTreeIgnore=['\.pyc$'] "исключения
 let g:NERDTreeChDirMode=2
 let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeHijackNetrw = 0
-let g:NERDTreeShowBookmarks = 1
-let g:NERDTreeQuitOnOpe=0
-
+let g:NERDTreeHijackNetrw=0
+let g:NERDTreeShowBookmarks=1
+let NERDTreeQuitOnOpen=1
 
 "<<<<<<<<<JEDI<<<<<<<<<<
 let g:jedi#popup_select_first = 0
 autocmd FileType python setlocal completeopt-=preview
-
-
-
 
 "<<<<<<<<<COLOR<<<<<<<<<<
 colorscheme gruvbox
@@ -159,11 +187,6 @@ if has("termguicolors") "Поддержка True Color, если это дост
     set termguicolors
 endif
 
-
-
-
-
-
 "<<<<<<<<<<<<<w0rp/Ale<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 let g:ale_lint_on_enter = 5
 let g:ale_lint_on_text_changed = 'never'
@@ -172,8 +195,6 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 "let g:ale_linters = {'python': ['flake8']}
 let g:ale_linters = {'python': ['Autopep8']}
-
-
 
 "<<<<<<<<<<<<<<<<PYTHON MODE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 let python_highlight_all = 1
@@ -219,4 +240,43 @@ set completeopt=menuone  "menuone,noinsert
     set completeopt-=preview "убрать раздражающие всплывающие окна с документацией для omnicompletion:
 
 
+"<<<<<<<<<FOLDING<<<<<<<<<<
+if has("folding")
+  set foldenable        " enable folding
+  set foldmethod=syntax " fold based on syntax highlighting
+  set foldlevelstart=99 " start editing with all folds open
+  " toggle folds
+  nnoremap <Space> za
+  vnoremap <Space> za
+  set foldtext=FoldText()
+  function! FoldText()
+    let l:lpadding = &fdc
+    redir => l:signs
+      execute 'silent sign place buffer='.bufnr('%')
+    redir End
+    let l:lpadding += l:signs =~ 'id=' ? 2 : 0
+    if exists("+relativenumber")
+      if (&number)
+        let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+      elseif (&relativenumber)
+        let l:lpadding += max([&numberwidth, strlen(v:foldstart) + strlen(v:foldstart - line('w0')), strlen(v:foldstart) + strlen(line('w$') - v:foldstart)]) + 1
+      endif
+    else
+      if (&number)
+        let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+      endif
+    endif
+    " expand tabs
+    let l:start = substitute(getline(v:foldstart), '\t', repeat(' ', &tabstop), 'g')
+    let l:end = substitute(substitute(getline(v:foldend), '\t', repeat(' ', &tabstop), 'g'), '^\s*', '', 'g')
+    let l:info = ' (' . (v:foldend - v:foldstart) . ')'
+    let l:infolen = strlen(substitute(l:info, '.', 'x', 'g'))
+    let l:width = winwidth(0) - l:lpadding - l:infolen
+    let l:separator = ' … '
+    let l:separatorlen = strlen(substitute(l:separator, '.', 'x', 'g'))
+    let l:start = strpart(l:start , 0, l:width - strlen(substitute(l:end, '.', 'x', 'g')) - l:separatorlen)
+    let l:text = l:start . ' … ' . l:end
+    return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
+  endfunction
+endif
 
