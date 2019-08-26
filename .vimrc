@@ -170,12 +170,13 @@ let NERDTreeQuitOnOpen=1
 
 "<<<<<<<<<JEDI<<<<<<<<<<
 let g:jedi#popup_select_first = 0
+let g:jedi#force_py_version = 3
 autocmd FileType python setlocal completeopt-=preview
 
 "<<<<<<<<<COLOR<<<<<<<<<<
 colorscheme gruvbox
 "colorscheme lucius
-set background=dark
+set background=light
     let g:airline_theme='dark' "'powerlineish'
     let g:airline#extensions#tabline#enabled = 1
 if $COLORTERM == 'gnome-terminal'
