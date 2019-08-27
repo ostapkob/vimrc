@@ -11,11 +11,18 @@ if has('win32') || has('win64')
    let g:python_folder = '~\AppData\Local\Programs\Python\Python37-32\python.exe'     
 else                                                                                          
     let g:plugged_home = '~/.vim/plugged' 
-    let g:python_folder = ''                                              
+    let g:python_folder = '/usr/bin/python3.7'
     if empty(glob("~/.vim/autoload/plug.vim"))                                        
-         execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'                              
-     endif                                                                                     
- endif   
+        execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'    
+    endi                                                                                     
+    if has('nvim')
+        let g:plugged_home = '~/.config/nvim/plugged'                                               
+        let g:python_folder = ''                                              
+        if empty(glob("~/.config/nvim/autoload/plug.vim"))                                        
+            execute '!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'                                                        
+        endif         
+    endif
+endif   
 
 set autoindent "Включить автоотступы как предыдущие
 set autochdir "Автоматически изменять текущий каталог
@@ -29,7 +36,7 @@ set clipboard=unnamed "????????????????
 set encoding=utf-8  " set vim encoding to UTF-8
 set expandtab "табы на пробелы и отстпы по >>
 " set foldmethod=manual "manual, syntax, indent | метод фолдинга - вручную (для обычных файлов)
-set guiheadroom=0 "Пустое пространство в нижней части окон gVim
+" set guiheadroom=0 "Пустое пространство в нижней части окон gVim
 set hidden "Скрыть файлы в фоновом режиме, а не закрывать их.
 set history=1000 "увеличить предел отмены.
 set hlsearch "Включаем подсветку выражения, которое ищется в тексте
@@ -153,14 +160,14 @@ if !has("gui_running")
 
 noremap <silent>- :m+<CR> " move current line down
 noremap <silent>_ :m-2<CR> " move current line up
-vnoremap <silent>- :m '>+1<CR>gv=gv " move visual selection down
-vnoremap <silent>_ :m '<-2<CR>gv=gv " move visual selection up
+vnoremap <silent>- :m >+1<CR>gv=gv " move visual selection down
+vnoremap <silent>_ :m <-2<CR>gv=gv " move visual selection up
 
 nnoremap <c-z> :u<CR>  "отменить проблемное сочетание клавиш
 inoremap <c-z> <c-o>:u<CR>
 
 "<<<<<<<<<NERDTree<<<<<<<<<<
-au VimEnter * NERDTreeToggle /run/media/ostap/Windows 10 SSD/YandexDisk/python 
+" au VimEnter * NERDTreeToggle /run/media/ostap/Windows 10 SSD/YandexDisk/python 
 let NERDTreeIgnore=['\.pyc$'] "исключения
 let g:NERDTreeChDirMode=2
 let g:NERDTreeAutoDeleteBuffer=1
@@ -169,6 +176,7 @@ let g:NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1
 
 "<<<<<<<<<JEDI<<<<<<<<<<
+let g:jedi#force_py_version = 3
 let g:jedi#popup_select_first = 0
 autocmd FileType python setlocal completeopt-=preview
 
