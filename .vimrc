@@ -206,7 +206,7 @@ autocmd FileType python setlocal completeopt-=preview
 "<<<<<<<<<COLOR<<<<<<<<<<
 colorscheme gruvbox
 "colorscheme lucius
-" set background=dark
+set background=dark
     " let g:airline_theme='dark' "'powerlineish'
     " let g:airline#extensions#tabline#enabled = 1
 
