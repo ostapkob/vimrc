@@ -2,17 +2,9 @@ function TRelative()
     set relativenumber!
 endfunc
 
-
 function Backgr()
     set background=light
 endfunc
-
-map <c-u> :call Backgr()<cr>
-" if echo(set background)=='background light'
-"     set background=dark
-" else
-"     set background=light
-" endif
 
 if has("gui_running") " GUI mode
     set guioptions-=T   " remove useless toolbar
@@ -187,7 +179,8 @@ nnoremap <c-z> :u<CR>  "отменить проблемное сочетание
 inoremap <c-z> <c-o>:u<CR>
 
 map <c-y> :call TRelative()<cr>
-
+map <c-u> :call Backgr()<cr>
+"
 "<<<<<<<<<NERDTree<<<<<<<<<<
 " au VimEnter * NERDTreeToggle /run/media/ostap/Windows 10 SSD/YandexDisk/python 
 let NERDTreeIgnore=['\.pyc$'] "исключения
