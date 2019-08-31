@@ -3,6 +3,16 @@ function TRelative()
 endfunc
 
 
+function Backgr()
+    set background=light
+endfunc
+
+map <c-u> :call Backgr()<cr>
+" if echo(set background)=='background light'
+"     set background=dark
+" else
+"     set background=light
+" endif
 
 if has("gui_running") " GUI mode
     set guioptions-=T   " remove useless toolbar
@@ -188,7 +198,6 @@ let g:NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1
 
 "<<<<<<<<<JEDI<<<<<<<<<<
-let g:jedi#force_py_version = 3
 let g:jedi#popup_select_first = 0
 let g:jedi#force_py_version = 3
 autocmd FileType python setlocal completeopt-=preview
@@ -204,9 +213,10 @@ autocmd FileType python setlocal completeopt-=preview
 "<<<<<<<<<COLOR<<<<<<<<<<
 colorscheme gruvbox
 "colorscheme lucius
-set background=light
-    let g:airline_theme='dark' "'powerlineish'
-    let g:airline#extensions#tabline#enabled = 1
+" set background=dark
+    " let g:airline_theme='dark' "'powerlineish'
+    " let g:airline#extensions#tabline#enabled = 1
+
 if $COLORTERM == 'gnome-terminal'
       set t_Co=256 "может помочь с цветолвой политрой
     endif
@@ -215,7 +225,6 @@ let base16colorspace=256 "может помочь с цветолвой поли
 if has("termguicolors") "Поддержка True Color, если это доступно в терминале
     set termguicolors
 endif
-" let g:airline_theme='<theme>'
 
 "<<<<<<<<<<<<<w0rp/Ale<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 let g:ale_lint_on_enter = 5
@@ -269,44 +278,4 @@ set completeopt=menuone  "menuone,noinsert
     let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
     set completeopt-=preview "убрать раздражающие всплывающие окна с документацией для omnicompletion:
 
-
-"<<<<<<<<<FOLDING<<<<<<<<<<
-if has("folding")
-  set foldenable        " enable folding
-  set foldmethod=syntax " fold based on syntax highlighting
-  set foldlevelstart=99 " start editing with all folds open
-  " toggle folds
-  nnoremap <Space> za
-  vnoremap <Space> za
-  set foldtext=FoldText()
-  function! FoldText()
-    let l:lpadding = &fdc
-    redir => l:signs
-      execute 'silent sign place buffer='.bufnr('%')
-    redir End
-    let l:lpadding += l:signs =~ 'id=' ? 2 : 0
-    if exists("+relativenumber")
-      if (&number)
-        let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
-      elseif (&relativenumber)
-        let l:lpadding += max([&numberwidth, strlen(v:foldstart) + strlen(v:foldstart - line('w0')), strlen(v:foldstart) + strlen(line('w$') - v:foldstart)]) + 1
-      endif
-    else
-      if (&number)
-        let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
-      endif
-    endif
-    " expand tabs
-    let l:start = substitute(getline(v:foldstart), '\t', repeat(' ', &tabstop), 'g')
-    let l:end = substitute(substitute(getline(v:foldend), '\t', repeat(' ', &tabstop), 'g'), '^\s*', '', 'g')
-    let l:info = ' (' . (v:foldend - v:foldstart) . ')'
-    let l:infolen = strlen(substitute(l:info, '.', 'x', 'g'))
-    let l:width = winwidth(0) - l:lpadding - l:infolen
-    let l:separator = ' … '
-    let l:separatorlen = strlen(substitute(l:separator, '.', 'x', 'g'))
-    let l:start = strpart(l:start , 0, l:width - strlen(substitute(l:end, '.', 'x', 'g')) - l:separatorlen)
-    let l:text = l:start . ' … ' . l:end
-    return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
-  endfunction
-endif
 
