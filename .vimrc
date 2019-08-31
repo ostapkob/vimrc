@@ -1,3 +1,9 @@
+function TRelative()
+    set relativenumber!
+endfunc
+
+
+
 if has("gui_running") " GUI mode
     set guioptions-=T   " remove useless toolbar
     set guioptions+=c   " prefer console dialogs to popups
@@ -87,20 +93,22 @@ Plug 'chriskempson/base16-vim' "Терминальные Темы ?
 Plug 'easymotion/vim-easymotion' "изи моушен
 Plug 'ervandew/supertab'  "супер таб
 Plug 'davidhalter/jedi-vim'
-Plug 'tpope/vim-fugitive' "git
+Plug 'jonathanfilip/vim-lucius' "color sheme
+Plug 'kien/ctrlp.vim' "не четкий поиск ctrl+p
 Plug 'lpenz/vimcommander' "дерево каталогов
+Plug 'majutsushi/tagbar' "навигация по класам и функциям
 Plug 'matze/vim-move' " переместить кусок кода Alt+J
 Plug 'morhetz/gruvbox' "color sheme
-Plug 'jonathanfilip/vim-lucius' "color sheme
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'scrooloose/nerdtree' "дерево каталогов
+Plug 'tmhedberg/SimpylFold'
+Plug 'tpope/vim-fugitive' "git
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tell-k/vim-autopep8'
 Plug 'tpope/vim-commentary'   "comment по gc
-Plug 'vim-airline/vim-airline-themes' "цветная менюшка airline
+Plug 'w0rp/ale' "Проверка синтаксиса  ??????????????????????
 Plug 'Yggdroot/indentLine' "Красивые табы |¦
 "Plug 'jiangmiao/auto-pairs' "авто кавычки
-Plug 'kien/ctrlp.vim' "не четкий поиск ctrl+p
-Plug 'tell-k/vim-autopep8'
-Plug 'w0rp/ale' "Проверка синтаксиса  ??????????????????????
 
 call plug#end()
 
@@ -125,7 +133,9 @@ map <S-Down> <C-w>-
 map <S-Up> <C-w>+
 map <S-Right> <C-w>>
 noremap <silent> <F9> :cal VimCommanderToggle()<CR> "F3-view F4-edit F5-copy F6-move F7-create dir F8-del
-nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-t> :NERDTreeToggle<CR>
+nmap <F8> :TagbarToggle<CR>
+
 nmap <Leader> <Plug>(easymotion-prefix)
 autocmd FileType python noremap <buffer> <F2> :call Autopep8()<CR>
 inoremap <Esc> <Esc>:w<CR>
@@ -166,6 +176,8 @@ vnoremap <silent>_ :m <-2<CR>gv=gv " move visual selection up
 nnoremap <c-z> :u<CR>  "отменить проблемное сочетание клавиш
 inoremap <c-z> <c-o>:u<CR>
 
+map <c-y> :call TRelative()<cr>
+
 "<<<<<<<<<NERDTree<<<<<<<<<<
 " au VimEnter * NERDTreeToggle /run/media/ostap/Windows 10 SSD/YandexDisk/python 
 let NERDTreeIgnore=['\.pyc$'] "исключения
@@ -179,6 +191,14 @@ let NERDTreeQuitOnOpen=1
 let g:jedi#force_py_version = 3
 let g:jedi#popup_select_first = 0
 autocmd FileType python setlocal completeopt-=preview
+
+" let g:jedi#auto_initialization = 1
+" let g:jedi#completions_enabled = 0
+" let g:jedi#auto_vim_configuration = 0
+" let g:jedi#smart_auto_mappings = 0
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#completions_command = ""
+" let g:jedi#show_call_signatures = "1"
 
 "<<<<<<<<<COLOR<<<<<<<<<<
 colorscheme gruvbox
@@ -194,6 +214,7 @@ let base16colorspace=256 "может помочь с цветолвой поли
 if has("termguicolors") "Поддержка True Color, если это доступно в терминале
     set termguicolors
 endif
+" let g:airline_theme='<theme>'
 
 "<<<<<<<<<<<<<w0rp/Ale<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 let g:ale_lint_on_enter = 5
