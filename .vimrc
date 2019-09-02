@@ -16,10 +16,12 @@ endif
 "не забудь установить git
 if has('win32') || has('win64')                                                               
    let g:plugged_home = '~/.vim/plugged' 
-   let g:python_folder = '~\AppData\Local\Programs\Python\Python37-32\python.exe'     
+   let g:python_folder = '~\AppData\Local\Programs\Python\Python37-32\python.exe'  
+   let g:jedi_set1 = ""   
 else                                                                                          
     let g:plugged_home = '~/.vim/plugged' 
     let g:python_folder = '/usr/bin/python3.7'
+    let g:jedi_set1 = 3
     if empty(glob("~/.vim/autoload/plug.vim"))                                        
         execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'    
     endi                                                                                     
@@ -35,15 +37,16 @@ endif
 set autoindent "Включить автоотступы как предыдущие
 set autochdir "Автоматически изменять текущий каталог
 set backspace=indent,eol,start "Параметры Backspace ??
-set cuc cul "Курсор
-set cursorline "Выделите строку, находящуюся в данный момент под курсором.
+"set cuc cul "Курсор
+"set cursorline "Выделите строку, находящуюся в данный момент под курсором.
 set confirm "Отображение диалогового окна подтверждения при закрытии несохраненного файла.
 set completeopt=longest,menuone,preview " better completion
 set copyindent    " copy the previous indentation on autoindenting
 set clipboard=unnamed "????????????????
 set encoding=utf-8  " set vim encoding to UTF-8
 set expandtab "табы на пробелы и отстпы по >>
-" set foldmethod=manual "manual, syntax, indent | метод фолдинга - вручную (для обычных файлов)
+set foldmethod=indent "manual, syntax, indent | метод фолдинга - вручную (для обычных файлов)
+set foldlevel=99
 " set guiheadroom=0 "Пустое пространство в нижней части окон gVim
 set hidden "Скрыть файлы в фоновом режиме, а не закрывать их.
 set history=1000 "увеличить предел отмены.
@@ -177,12 +180,12 @@ vnoremap <silent>_ :m <-2<CR>gv=gv " move visual selection up
 
 nnoremap <c-z> :u<CR>  "отменить проблемное сочетание клавиш
 inoremap <c-z> <c-o>:u<CR>
-
+nnoremap <space> za  " Enable folding with the spacebar
 map <c-y> :call TRelative()<cr>
 map <c-u> :call Backgr()<cr>
 "
 "<<<<<<<<<NERDTree<<<<<<<<<<
-" au VimEnter * NERDTreeToggle /run/media/ostap/Windows 10 SSD/YandexDisk/python 
+au VimEnter * NERDTreeToggle C:\BI\python.lnk
 let NERDTreeIgnore=['\.pyc$'] "исключения
 let g:NERDTreeChDirMode=2
 let g:NERDTreeAutoDeleteBuffer=1
@@ -192,7 +195,7 @@ let NERDTreeQuitOnOpen=1
 
 "<<<<<<<<<JEDI<<<<<<<<<<
 let g:jedi#popup_select_first = 0
-let g:jedi#force_py_version = 3
+let g:jedi#force_py_version = jedi_set1
 autocmd FileType python setlocal completeopt-=preview
 
 " let g:jedi#auto_initialization = 1
