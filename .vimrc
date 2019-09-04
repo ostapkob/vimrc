@@ -27,7 +27,7 @@ else
     endi                                                                                     
     if has('nvim')
         let g:plugged_home = '~/.config/nvim/plugged'                                               
-        let g:python_folder = ''                                              
+        let g:python_folder = '/usr/bin/python3.7'
         if empty(glob("~/.config/nvim/autoload/plug.vim"))                                        
             execute '!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'                                                        
         endif         
