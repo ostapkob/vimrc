@@ -184,7 +184,7 @@ nnoremap <c-z> :u<CR>  "отменить проблемное сочетание
 inoremap <c-z> <c-o>:u<CR>
 nnoremap <space> za  " Enable folding with the spacebar
 map <c-y> :call TRelative()<cr>
-map <c-l> :call Backgr()<cr>
+map <c-u> :call Backgr()<cr>
 "
 "<<<<<<<<<NERDTree<<<<<<<<<<
 au VimEnter * NERDTreeToggle C:\BI\python.lnk
