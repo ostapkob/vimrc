@@ -106,6 +106,7 @@ Plug 'matze/vim-move' " переместить кусок кода Alt+J
 Plug 'morhetz/gruvbox' "color sheme
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'scrooloose/nerdtree' "дерево каталогов
+Plug 'stevearc/vim-arduino'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-fugitive' "git
 Plug 'terryma/vim-multiple-cursors'
@@ -114,6 +115,7 @@ Plug 'tpope/vim-commentary'   "comment по gc
 Plug 'w0rp/ale' "Проверка синтаксиса  ??????????????????????
 Plug 'Yggdroot/indentLine' "Красивые табы |¦
 "Plug 'jiangmiao/auto-pairs' "авто кавычки
+
 
 call plug#end()
 
@@ -138,12 +140,11 @@ map <S-Down> <C-w>-
 map <S-Up> <C-w>+
 map <S-Right> <C-w>>
 noremap <silent> <F9> :cal VimCommanderToggle()<CR> "F3-view F4-edit F5-copy F6-move F7-create dir F8-del
+
 nmap <C-t> :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
+nmap  <Leader> <Plug>(easymotion-prefix)
 
-
-
-nmap <Leader> <Plug>(easymotion-prefix)
 autocmd FileType python noremap <buffer> <F2> :call Autopep8()<CR>
 inoremap <Esc> <Esc>:w<CR>
 inoremap <leader>, <C-x><C-o>
@@ -185,7 +186,26 @@ inoremap <c-z> <c-o>:u<CR>
 nnoremap <space> za  " Enable folding with the spacebar
 map <c-y> :call TRelative()<cr>
 map <c-u> :call Backgr()<cr>
-"
+"<<<<<<< HEAD
+
+
+"Arduimo
+nnoremap <buffer> <leader>am :ArduinoVerify<CR>
+nnoremap <buffer> <leader>au :ArduinoUpload<CR>
+nnoremap <buffer> <leader>ad :ArduinoUploadAndSerial<CR>
+nnoremap <buffer> <leader>ab :ArduinoChooseBoard<CR>
+nnoremap <buffer> <leader>ap :ArduinoChooseProgrammer<CR>
+let g:arduino_dir = '/usr/local/share/arduino'
+
+
+
+" my_file.ino [arduino:avr:uno]
+function! MyStatusLine()
+  return '%f [' . g:arduino_board . ']'
+endfunction
+setl statusline=%!MyStatusLine()
+
+
 "<<<<<<<<<NERDTree<<<<<<<<<<
 au VimEnter * NERDTreeToggle C:\BI\python.lnk
 let NERDTreeIgnore=['\.pyc$'] "исключения
