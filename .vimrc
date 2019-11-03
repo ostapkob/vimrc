@@ -2,6 +2,10 @@ function TRelative()
     set relativenumber!
 endfunc
 
+function SetNoWrap()
+    set nowrap!
+endfunc
+
 function Backgr()
     set background=light
 endfunc
@@ -65,6 +69,7 @@ set noswapfile "Отключить создание свапа
 set visualbell "Не мигать
 set nowrapscan "Останавливать поиск при достижении конца файла
 set nowritebackup "Отключить создание файлов бекапа на запись
+set nowrap "перенос строки
 set nrformats-=octal "Воспринимать восьмеричное как десятичное при увеличении чисел.
 set relativenumber "подвижные относительные номера строк
 set scrolloff=4 "Количество строк экрана, которые нужно держать выше и ниже курсора.
@@ -184,8 +189,9 @@ vnoremap <silent>_ :m <-2<CR>gv=gv " move visual selection up
 nnoremap <c-z> :u<CR>  "отменить проблемное сочетание клавиш
 inoremap <c-z> <c-o>:u<CR>
 nnoremap <space> za  " Enable folding with the spacebar
-map <c-y> :call TRelative()<cr>
+map <c-i> :call TRelative()<cr>
 map <c-u> :call Backgr()<cr>
+map <c-w> :call SetNoWrap()<cr>
 "<<<<<<< HEAD
 
 
