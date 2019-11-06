@@ -147,7 +147,6 @@ noremap <silent> <F9> :cal VimCommanderToggle()<CR> "F3-view F4-edit F5-copy F6-
 nmap <C-t> :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 " map  <Leader> <Plug>(easymotion-prefix)
-map s <Plug>(easymotion-s)
 autocmd FileType python noremap <buffer> <F2> :call Autopep8()<CR>
 inoremap <Esc> <Esc>:w<CR>
 inoremap <leader>, <C-x><C-o>
