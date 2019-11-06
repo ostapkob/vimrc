@@ -16,8 +16,6 @@ if has("gui_running") " GUI mode
     set guioptions-=m " По умолчанию меню скрыто
     set guifont=Monospace\ 9 " Устанавливаем шрифт
 endif
-
-"не забудь установить git
 if has('win32') || has('win64')                                                               
    let g:plugged_home = '~/.vim/plugged' 
    let g:python_folder = '~\AppData\Local\Programs\Python\Python37-32\python.exe'  
@@ -148,8 +146,8 @@ noremap <silent> <F9> :cal VimCommanderToggle()<CR> "F3-view F4-edit F5-copy F6-
 
 nmap <C-t> :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
-nmap  <Leader> <Plug>(easymotion-prefix)
-
+" map  <Leader> <Plug>(easymotion-prefix)
+map s <Plug>(easymotion-s)
 autocmd FileType python noremap <buffer> <F2> :call Autopep8()<CR>
 inoremap <Esc> <Esc>:w<CR>
 inoremap <leader>, <C-x><C-o>
@@ -191,7 +189,7 @@ inoremap <c-z> <c-o>:u<CR>
 nnoremap <space> za  " Enable folding with the spacebar
 map <c-i> :call TRelative()<cr>
 map <c-u> :call Backgr()<cr>
-map <c-w> :call SetNoWrap()<cr>
+map <c-s> :call SetNoWrap()<cr>
 "<<<<<<< HEAD
 
 
