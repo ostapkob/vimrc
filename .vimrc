@@ -108,6 +108,7 @@ Plug 'majutsushi/tagbar' "навигация по класам и функция
 Plug 'matze/vim-move' " переместить кусок кода Alt+J
 Plug 'morhetz/gruvbox' "color sheme
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'posva/vim-vue'
 Plug 'scrooloose/nerdtree' "дерево каталогов
 Plug 'stevearc/vim-arduino'
 Plug 'tmhedberg/SimpylFold'
@@ -187,9 +188,9 @@ vnoremap <silent>_ :m <-2<CR>gv=gv " move visual selection up
 nnoremap <c-z> :u<CR>  "отменить проблемное сочетание клавиш
 inoremap <c-z> <c-o>:u<CR>
 nnoremap <space> za  " Enable folding with the spacebar
-map <c-i> :call TRelative()<cr>
+" map <c-i> :call TRelative()<cr>
 map <c-u> :call Backgr()<cr>
-map <c-s> :call SetNoWrap()<cr>
+map <c-i> :call SetNoWrap()<cr>
 "<<<<<<< HEAD
 
 
@@ -211,13 +212,13 @@ setl statusline=%!MyStatusLine()
 
 
 "<<<<<<<<<NERDTree<<<<<<<<<<
-au VimEnter * NERDTreeToggle C:\BI\python.lnk
+" au VimEnter * NERDTreeToggle C:\BI\python.lnk
 let NERDTreeIgnore=['\.pyc$'] "исключения
 let g:NERDTreeChDirMode=2
 let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeHijackNetrw=0
 let g:NERDTreeShowBookmarks=1
-let NERDTreeQuitOnOpen=1
+" let NERDTreeQuitOnOpen=1
 
 "<<<<<<<<<JEDI<<<<<<<<<<
 let g:jedi#popup_select_first = 0
@@ -233,8 +234,8 @@ autocmd FileType python setlocal completeopt-=preview
 " let g:jedi#show_call_signatures = "1"
 
 "<<<<<<<<<COLOR<<<<<<<<<<
-colorscheme gruvbox
-"colorscheme lucius
+" colorscheme gruvbox
+colorscheme lucius
 set background=dark
     " let g:airline_theme='dark' "'powerlineish'
     " let g:airline#extensions#tabline#enabled = 1
