@@ -192,8 +192,6 @@ inoremap <c-z> <c-o>:u<CR>
 nnoremap <space> za  " Enable folding with the spacebar
 map <c-u> :call Backgr()<cr>
 map <c-i> :call SetNoWrap()<cr>
-"<<<<<<< HEAD
-
 
 "Arduimo
 nnoremap <buffer> <leader>am :ArduinoVerify<CR>
