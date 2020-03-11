@@ -26,7 +26,7 @@ else
     let g:jedi_set1 = 3
     if empty(glob("~/.vim/autoload/plug.vim"))                                        
         execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'    
-    endi                                                                                     
+    endif
     if has('nvim')
         let g:plugged_home = '~/.config/nvim/plugged'                                               
         let g:python_folder = '/usr/bin/python3.7'
@@ -104,6 +104,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'jonathanfilip/vim-lucius' "color sheme
 Plug 'kien/ctrlp.vim' "не четкий поиск ctrl+p
 Plug 'lpenz/vimcommander' "дерево каталогов
+Plug 'mattn/emmet-vim' 
 Plug 'majutsushi/tagbar' "навигация по класам и функциям
 Plug 'matze/vim-move' " переместить кусок кода Alt+J
 Plug 'morhetz/gruvbox' "color sheme
@@ -118,6 +119,7 @@ Plug 'tell-k/vim-autopep8'
 Plug 'tpope/vim-commentary'   "comment по gc
 Plug 'w0rp/ale' "Проверка синтаксиса  ??????????????????????
 Plug 'Yggdroot/indentLine' "Красивые табы |¦
+
 "Plug 'jiangmiao/auto-pairs' "авто кавычки
 
 
@@ -188,7 +190,6 @@ vnoremap <silent>_ :m <-2<CR>gv=gv " move visual selection up
 nnoremap <c-z> :u<CR>  "отменить проблемное сочетание клавиш
 inoremap <c-z> <c-o>:u<CR>
 nnoremap <space> za  " Enable folding with the spacebar
-" map <c-i> :call TRelative()<cr>
 map <c-u> :call Backgr()<cr>
 map <c-i> :call SetNoWrap()<cr>
 "<<<<<<< HEAD
@@ -234,8 +235,8 @@ autocmd FileType python setlocal completeopt-=preview
 " let g:jedi#show_call_signatures = "1"
 
 "<<<<<<<<<COLOR<<<<<<<<<<
-" colorscheme gruvbox
-colorscheme lucius
+colorscheme gruvbox
+" colorscheme lucius
 set background=dark
     " let g:airline_theme='dark' "'powerlineish'
     " let g:airline#extensions#tabline#enabled = 1
