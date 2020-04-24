@@ -119,7 +119,9 @@ Plug 'tell-k/vim-autopep8'
 Plug 'tpope/vim-commentary'   "comment по gc
 Plug 'w0rp/ale' "Проверка синтаксиса  ??????????????????????
 Plug 'Yggdroot/indentLine' "Красивые табы |¦
-
+Plug 'vim-syntastic/syntastic' "c++
+Plug 'xavierd/clang_complete' "c++
+Plug 'frazrepo/vim-rainbow'
 "Plug 'jiangmiao/auto-pairs' "авто кавычки
 
 
@@ -153,7 +155,9 @@ nmap <F8> :TagbarToggle<CR>
 nmap  ; <Plug>(easymotion-s)
 autocmd FileType python noremap <buffer> <F2> :call Autopep8()<CR>
 inoremap <Esc> <Esc>:w<CR>
-inoremap <leader>, <C-x><C-o>
+" inoremap <leader>, <C-x><C-o>
+" inoremap <C-o> <C-n>
+inoremap <leader>, <C-n><C-o>
 nmap gn :bn<cr>
 nmap gp :bp<cr>
 nmap gd :bd<cr>
@@ -199,8 +203,7 @@ nnoremap <buffer> <leader>au :ArduinoUpload<CR>
 nnoremap <buffer> <leader>ad :ArduinoUploadAndSerial<CR>
 nnoremap <buffer> <leader>ab :ArduinoChooseBoard<CR>
 nnoremap <buffer> <leader>ap :ArduinoChooseProgrammer<CR>
-let g:arduino_dir = '/usr/local/share/arduino'
-
+let g:arduino_dir = '/home/ostap/Downloads/arduino-1.8.10/arduino'
 
 
 " my_file.ino [arduino:avr:uno]
@@ -233,6 +236,7 @@ autocmd FileType python setlocal completeopt-=preview
 " let g:jedi#show_call_signatures = "1"
 
 "<<<<<<<<<COLOR<<<<<<<<<<
+let g:rainbow_active = 1
 colorscheme gruvbox
 " colorscheme lucius
 set background=dark
